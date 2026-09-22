@@ -1,0 +1,510 @@
+[
+  {
+    "id": "14",
+    "name": "Audi",
+    "models": [
+      {
+        "id": "9",
+        "name": "A1"
+      },
+      {
+        "id": "58",
+        "name": "A3"
+      },
+      {
+        "id": "88",
+        "name": "A4"
+      },
+      {
+        "id": "83",
+        "name": "A5"
+      },
+      {
+        "id": "216",
+        "name": "A6"
+      },
+      {
+        "id": "109",
+        "name": "Q3"
+      },
+      {
+        "id": "120",
+        "name": "Q5"
+      },
+      {
+        "id": "121",
+        "name": "Q7"
+      },
+      {
+        "id": "61",
+        "name": "RS6"
+      },
+      {
+        "id": "110",
+        "name": "RSQ3"
+      },
+      {
+        "id": "124",
+        "name": "S3"
+      },
+      {
+        "id": "225",
+        "name": "S4"
+      },
+      {
+        "id": "62",
+        "name": "TT"
+      },
+      {
+        "id": "125",
+        "name": "TT S"
+      }
+    ]
+  },
+  {
+    "id": "15",
+    "name": "BMW",
+    "models": [
+      {
+        "id": "310",
+        "name": "218i"
+      },
+      {
+        "id": "269",
+        "name": "M 135i"
+      },
+      {
+        "id": "270",
+        "name": "M 140i"
+      },
+      {
+        "id": "267",
+        "name": "M 235i"
+      },
+      {
+        "id": "33",
+        "name": "M2"
+      },
+      {
+        "id": "34",
+        "name": "M3"
+      },
+      {
+        "id": "37",
+        "name": "M6"
+      },
+      {
+        "id": "24",
+        "name": "Série 1"
+      },
+      {
+        "id": "272",
+        "name": "Série 2 Gran/Active Tourer"
+      },
+      {
+        "id": "26",
+        "name": "Série 3"
+      },
+      {
+        "id": "27",
+        "name": "Série 4"
+      },
+      {
+        "id": "28",
+        "name": "Série 5"
+      },
+      {
+        "id": "113",
+        "name": "Série 6"
+      },
+      {
+        "id": "38",
+        "name": "X1"
+      },
+      {
+        "id": "90",
+        "name": "X2"
+      },
+      {
+        "id": "39",
+        "name": "X3"
+      },
+      {
+        "id": "307",
+        "name": "X3 M"
+      },
+      {
+        "id": "40",
+        "name": "X4"
+      },
+      {
+        "id": "302",
+        "name": "X4 M"
+      },
+      {
+        "id": "41",
+        "name": "X5"
+      },
+      {
+        "id": "42",
+        "name": "X6"
+      },
+      {
+        "id": "287",
+        "name": "Z4"
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "name": "Chevrolet",
+    "models": [
+      {
+        "id": "5",
+        "name": "Camaro"
+      },
+      {
+        "id": "114",
+        "name": "Cruze"
+      },
+      {
+        "id": "288",
+        "name": "Equinox"
+      },
+      {
+        "id": "301",
+        "name": "S10"
+      },
+      {
+        "id": "284",
+        "name": "Trailblazer"
+      }
+    ]
+  },
+  {
+    "id": "46",
+    "name": "Citroen",
+    "models": [
+      {
+        "id": "111",
+        "name": "DS3"
+      }
+    ]
+  },
+  {
+    "id": "44",
+    "name": "Fiat",
+    "models": [
+      {
+        "id": "104",
+        "name": "Toro"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Ford",
+    "models": [
+      {
+        "id": "304",
+        "name": "Bronco"
+      },
+      {
+        "id": "87",
+        "name": "Fusion"
+      },
+      {
+        "id": "308",
+        "name": "Maverick"
+      },
+      {
+        "id": "51",
+        "name": "Mustang"
+      },
+      {
+        "id": "99",
+        "name": "New Fiesta"
+      },
+      {
+        "id": "100",
+        "name": "Ranger"
+      }
+    ]
+  },
+  {
+    "id": "48",
+    "name": "Honda",
+    "models": [
+      {
+        "id": "295",
+        "name": "Civic"
+      }
+    ]
+  },
+  {
+    "id": "58",
+    "name": "Injeção Programável Aspirado",
+    "models": [
+      {
+        "id": "278",
+        "name": "Fueltech"
+      },
+      {
+        "id": "282",
+        "name": "Hondata"
+      }
+    ]
+  },
+  {
+    "id": "59",
+    "name": "Injeção Programável Turbo",
+    "models": [
+      {
+        "id": "289",
+        "name": "Fueltech"
+      }
+    ]
+  },
+  {
+    "id": "49",
+    "name": "Jeep",
+    "models": [
+      {
+        "id": "306",
+        "name": "Commander"
+      },
+      {
+        "id": "106",
+        "name": "Compass"
+      },
+      {
+        "id": "105",
+        "name": "Renegade"
+      }
+    ]
+  },
+  {
+    "id": "53",
+    "name": "Land Rover",
+    "models": [
+      {
+        "id": "246",
+        "name": "Discovery Sport"
+      },
+      {
+        "id": "247",
+        "name": "Evoque"
+      }
+    ]
+  },
+  {
+    "id": "21",
+    "name": "Mercedes",
+    "models": [
+      {
+        "id": "97",
+        "name": "A"
+      },
+      {
+        "id": "175",
+        "name": "B"
+      },
+      {
+        "id": "65",
+        "name": "C"
+      },
+      {
+        "id": "98",
+        "name": "CLA"
+      },
+      {
+        "id": "107",
+        "name": "GLA"
+      },
+      {
+        "id": "185",
+        "name": "GLE / GLE Coupé"
+      },
+      {
+        "id": "298",
+        "name": "ML"
+      },
+      {
+        "id": "188",
+        "name": "S"
+      }
+    ]
+  },
+  {
+    "id": "19",
+    "name": "Mini",
+    "models": [
+      {
+        "id": "54",
+        "name": "Cooper"
+      },
+      {
+        "id": "172",
+        "name": "Countryman"
+      }
+    ]
+  },
+  {
+    "id": "9",
+    "name": "Mitsubishi",
+    "models": [
+      {
+        "id": "89",
+        "name": "Eclipse"
+      },
+      {
+        "id": "94",
+        "name": "Lancer"
+      },
+      {
+        "id": "95",
+        "name": "Lancer Evolution"
+      },
+      {
+        "id": "101",
+        "name": "Lancer Ralliart"
+      }
+    ]
+  },
+  {
+    "id": "54",
+    "name": "Nissan",
+    "models": [
+      {
+        "id": "262",
+        "name": "350Z"
+      },
+      {
+        "id": "263",
+        "name": "370Z"
+      },
+      {
+        "id": "296",
+        "name": "Frontier"
+      }
+    ]
+  },
+  {
+    "id": "47",
+    "name": "Porsche",
+    "models": [
+      {
+        "id": "236",
+        "name": "911"
+      },
+      {
+        "id": "238",
+        "name": "Boxster"
+      },
+      {
+        "id": "91",
+        "name": "Cayenne"
+      },
+      {
+        "id": "239",
+        "name": "Cayman"
+      },
+      {
+        "id": "241",
+        "name": "Macan"
+      }
+    ]
+  },
+  {
+    "id": "41",
+    "name": "Renault",
+    "models": [
+      {
+        "id": "55",
+        "name": "Sandero"
+      }
+    ]
+  },
+  {
+    "id": "16",
+    "name": "Subaru",
+    "models": [
+      {
+        "id": "265",
+        "name": "Forester XT"
+      },
+      {
+        "id": "44",
+        "name": "Impreza"
+      },
+      {
+        "id": "283",
+        "name": "Legacy"
+      }
+    ]
+  },
+  {
+    "id": "57",
+    "name": "Troller",
+    "models": [
+      {
+        "id": "277",
+        "name": "T4"
+      }
+    ]
+  },
+  {
+    "id": "1",
+    "name": "Volkswagen",
+    "models": [
+      {
+        "id": "235",
+        "name": "Amarok"
+      },
+      {
+        "id": "108",
+        "name": "Fusca"
+      },
+      {
+        "id": "69",
+        "name": "Golf"
+      },
+      {
+        "id": "70",
+        "name": "Jetta"
+      },
+      {
+        "id": "276",
+        "name": "Nivus"
+      },
+      {
+        "id": "92",
+        "name": "Passat"
+      },
+      {
+        "id": "86",
+        "name": "Polo"
+      },
+      {
+        "id": "103",
+        "name": "T-Cross"
+      },
+      {
+        "id": "297",
+        "name": "Taos"
+      },
+      {
+        "id": "71",
+        "name": "Tiguan"
+      },
+      {
+        "id": "78",
+        "name": "Up!"
+      },
+      {
+        "id": "93",
+        "name": "Virtus"
+      }
+    ]
+  }
+]

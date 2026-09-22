@@ -1,0 +1,268 @@
+function PreparaCampos(seletor) {
+	$(seletor).find("input, select, textarea").focus(function() { CheckLabel($(this)); }).blur(function(){ CheckLabel($(this)); }).keypress(function(){ CheckLabel($(this)); }).change(function(){ CheckLabel($(this)); }).each(function(index, element) { CheckLabel($(this)); });;
+	$(seletor).find(".ajxcheck").focus(function(e) { ChecarCampo($(this).attr("id")); }).change(function(e) { ChecarCampo($(this).attr("id")); }).keyup(function(e) { ChecarCampo($(this).attr("id")); }).keypress(function(e) { ChecarCampo($(this).attr("id")); }).each(function(index, element) { $(this).after('<div class="ajxalerta" id="ajx'+$(this).attr("id")+'"></div>').closest(".linha").addClass("ajx"); ChecarCampo($(this).attr("id")); });
+	setTimeout(function(){ $(seletor).find(".labelinterno").each(function(index, element) { CheckLabel($(this)); }); }, 1);
+	$(".curso #infos .selecao a").click(function(e) {
+		tmplink = $(this).attr("href");
+		if ( tmplink.indexOf("#") > -1 ) {
+			tmplink = tmplink.substring(tmplink.indexOf("#")+1);
+			if ( $("#"+tmplink).length === 1 ) {
+				$(".curso #infos .selecao .ativo").removeClass("ativo");
+				$(this).parent().addClass("ativo");
+				$(".curso #infos .item.ativo").removeClass("ativo");
+				$("#"+tmplink).addClass("ativo");
+				return false;
+			}
+		}
+	});
+}
+$(document).ready(function() {
+	IEUpdate();
+	PreparaCampos("html");
+	setTimeout(function(){ $("html").addClass("carregado"); }, 100);
+	if ( $("#performance-filtro").length == 1 )
+		AjxPerfFabricante();
+	if ( !document.cookie.includes("lgpd=ok",0) ) { $(".lgpd").fadeIn(); }
+});
+$(window).scroll(function(eventData) {
+	if ( $(".curso .informacoes #comprar").length == 1 ) {
+		if ( ($(window).scrollTop() > $(".informacoes").offset().top - 25) && ($(window).height() >= $("#comprar").height()) ) {
+			$("#comprar").addClass("fixo");
+			if ( $(window).scrollTop() > $(".homevoltar").offset().top - $("#comprar").height() - 50 )
+				$("#comprar").addClass("fim");
+			else
+				$("#comprar").removeClass("fim");
+		}
+		else
+			$("#comprar").removeClass("fixo");
+	}
+});
+function FecharLGPD() {var d = new Date();d.setTime(d.getTime() + (30 * 24*60*60*1000));document.cookie = "lgpd=ok; expires=" + d.toUTCString() + "; path=/;";$(".lgpd").fadeOut();}
+function MenuMobile() { $("#bot-mobile, #menu, #mobile-overlay").toggleClass("ativo"); }
+function MobilePerfil() { if ( $("#mobile-menulogado").length == 1 ) { $("#botao-perfil, #mobile-menulogado, #mobile-overlay").toggleClass("ativo"); } }
+function MobileFechar() { $("#mobile-overlay, #botao-perfil, #mobile-menulogado, #bot-mobile, #menu").removeClass("ativo"); }
+ajxperfvazio = '<div id="ajxstages"><p class="msg-instrucao"><img src="'+$("#siteurl").val()+'imagens/logo.png" />Utilize nosso filtro para encontrar o que est&aacute; procurando</p></div>';
+function Contrato(idx) {
+	if ( confirm("Deseja confirmar que concorda com o contrato?") )
+		document.location.href = $("#siteurl").val()+"contrato/aceitar/"+idx;
+}
+function PerformanceStage(elemento) {
+	pid = $(elemento).attr("id");
+	tmpindex = $(elemento).parent().index();
+	$(".link-pacote").removeClass("ativo").eq(tmpindex).addClass("ativo");
+	$(".stage, #imagens").hide();
+	$("."+pid).show();
+	PerformanceMensagem();
+}
+function PerformanceMensagem() {
+	pacotetxt = $(".link-pacote.ativo a").html();
+	carrotxt = $(".titulo-item").html();
+	$("#mensagem").val("Solicito informações do pacote "+pacotetxt+" para o veículo "+carrotxt);
+}
+function AjxPerfFabricante() {
+	$("#ajxstages").html(ajxperfvazio);
+	if ( ""+$("#fabricante").val() == "" )
+		return;
+	$.ajax("ajx-fabricante.asp?id="+$("#fabricante").val()).done(function(html) {
+		$("#ajxfabricante").html(html);
+		PreparaCampos("#ajxfabricante");
+		AjxPerfModelo();
+	});
+}
+function AjxPerfModelo() {
+	$("#ajxstages").html(ajxperfvazio);
+	if ( ""+$("#modelo").val() == "" )
+		return;
+	$.ajax("ajx-modelo.asp?id="+$("#modelo").val()).done(function(html) {
+		$("#ajxmodelo").html(html);
+		PreparaCampos("#ajxmodelo");
+		AjxPerfAno();
+	});
+}
+function AjxPerfAno() {
+	$("#ajxstages").html(ajxperfvazio);
+	if ( ""+$("#ano").val() == "" )
+		return;
+	$.ajax("ajx-ano.asp?id="+$("#ano").val()).done(function(html) {
+		$("#ajxano").html(html);
+		PreparaCampos("#ajxano");
+		AjxPerfVersao();
+	});
+}
+function AjxPerfVersao() {
+	$("#ajxstages").html(ajxperfvazio);
+	if ( ""+$("#versao").val() == "" )
+		return;
+	$.ajax("ajx-versao.asp?id="+$("#versao").val()).done(function(html) {
+		$("#ajxstages").html(html);
+		AplicarMagnific();
+		Carrossel();
+		PreparaCampos('.formulario');
+		PerformanceMensagem();
+	});
+}
+function IEUpdate() {
+	var tmpua = window.navigator.userAgent;
+	var tmpie = tmpua.indexOf("MSIE ");
+	tmpiev = "";
+	tmpdcss = "position:fixed;z-index:111111;right:0;top:0;left:0;border-bottom:1px solid #A29330;background:#FDF2AB;text-align:left;font-family:Arial;color:#000;font-size:12px;padding:5px 36px 5px 10px;"
+	tmpacss = "font-family:Arial;color:#00a1f1;font-size:12px;text-decoration:underline;";
+	tmpccss = "font-family:Arial;color:#000;cursor:pointer;position:absolute;right:6px;top:0;bottom:0;width:12px;font-weight:bold;font-size:18px;"
+	if (tmpie > 0) {
+		tmpie = parseInt(tmpua.substring(tmpie+5,tmpua.indexOf(".",tmpie)));
+		if (tmpie < 9) {
+			tmpiev = " (Internet Explorer "+tmpie+")";
+			$("body").prepend('<div style="'+tmpdcss+'">Seu navegador'+tmpiev+' está <b>desatualizado</b>. Ele possui <b>falhas de segurança</b>, e pode <b>apresentar problemas</b> para exibir este site. <a href="http://outdatedbrowser.com/pt-br" target="_blank" style="'+tmpacss+'">Veja como atualizar o seu navegador</a><div style="'+tmpccss+'" onClick="$(this).parent().hide();">×</div></div>');
+		}
+	}
+}
+function CheckLabel(elemento) {
+	if ( elemento.closest(".linha").find(".erro").css("opacity") == 1 && ( $("html.carregado").length == 1 || elemento.closest(".linha").find(".erro.fixo").length == 0 ) )
+		elemento.removeClass("comerro").closest(".linha").find(".erro").fadeOut();
+	if ( elemento.val() != "" || elemento.is(":focus") )
+		elemento.closest(".linha").find(".label").addClass("ativo");
+	else
+		elemento.closest(".linha").find(".label").removeClass("ativo");
+
+}
+function CampoCheck(id,checagem,mensagem) {
+	if ( checagem ) {
+		if ( idfoco == "" ) {
+			idfoco = id;
+			if ( $("#"+id).closest(".linha").length == 1 ) {
+				if ( $(window).scrollTop() > $("#"+id).closest(".linha").offset().top )
+					$(window).scrollTop($("#"+id).closest(".linha").offset().top);
+			}
+			$("#"+id).focus();
+		}
+		if ( mensagem != "" )
+			$("#"+id).closest(".linha").find(".erro").html(mensagem);
+		else if ( $("#"+id+"erro").length == 1 )
+			$("#"+id).closest(".linha").find(".erro").html(decodeURIComponent(escape(""+$("#"+id+"erro").val())));
+		$("#"+id).addClass("comerro").closest(".linha").find(".erro").stop(true,true).fadeIn();
+
+	}
+}
+function ChecarCampo(nome) {
+	clearTimeout(window["timer"+nome]);
+	window["timer"+nome] = setTimeout(function(){ ChecarCampoTimer(nome) }, 200);
+}
+function ChecarCampoTimer(nome) {
+	valor = $("#"+nome).val();
+	if ( window["old"+nome] != valor ) {
+		window["old"+nome] = valor;
+		ChecarCampoAjx(nome,valor);
+	}
+}
+function ChecarCampoAjx(nome,valor) {
+	$("#ajx"+nome).html("");
+	tipo = $("#"+nome).attr("name");
+	pasta = $("#ajx"+nome).closest("form").attr("data-pasta");
+	if ( (tipo != "cpf" || VCPF(valor)) && (tipo != "cnpj" || VCNPJ(valor)) && (tipo != "email" || VEmail(valor)) && (tipo != "usuario" || (valor.length >= 6 && valor.match(/^(?=.*\d)/) ) ) )
+		$.ajax({url: pasta+"/ajx-check.asp?tipo="+tipo+"&valor="+valor}).done(function(data) {$("#ajx"+nome).html(data); });
+}
+var idfoco = "";
+var recaptchasucesso = false;
+function RecaptchaOk() { recaptchasucesso = true; $("#recaptchadiv .erro").hide(); }
+var win = null;
+function VAgenda() {
+	idfoco = "";
+	CampoCheck("nome",(!$("#nome").val()),"");
+	CampoCheck("datanasc",(!VData($("#datanasc").val())),"");
+	CampoCheck("sexom",($(".sexo:checked").length == 0),"");
+	CampoCheck("email",(!VEmail($("#email").val())),"");
+	CampoCheck("fone",(!$("#fone").val()),"");
+	CampoCheck("dataagenda",(!VData($("#dataagenda").val())),"");
+	CampoCheck("periodo",(!$("#periodo").val()),"");
+	CampoCheck("mensagem",(!$("#mensagem").val()),"");
+	if ( $("#recaptchadiv").length == 1 && !recaptchasucesso ) {
+		$("#recaptchadiv .erro").fadeOut();
+		CampoCheck("recaptchacheck",(!recaptchasucesso),"");
+	}
+	return (idfoco == "");
+}
+function VContato() {
+	idfoco = "";
+	CampoCheck("nome",(!$("#nome").val()),"");
+	CampoCheck("email",(!VEmail($("#email").val())),"");
+	CampoCheck("assunto",($("#assunto").length == 1 && !$("#assunto").val()),"");
+	CampoCheck("mensagem",(!$("#mensagem").val()),"");
+	if ( $("#recaptchadiv").length == 1 && !recaptchasucesso ) {
+		$("#recaptchadiv .erro").fadeOut();
+		CampoCheck("recaptchacheck",(!recaptchasucesso),"");
+	}
+	return (idfoco == "");
+}
+function AjxContato() {
+	if ( VContato() ) {
+		$.ajax($("#siteurl").val()+"contato/ajx-mail.asp?nome="+$("#nome").val()+"&email="+$("#email").val()+"&fone="+$("#fone").val()+"&cidade="+$("#cidade").val()+"&assunto="+$("#assunto").val()+"&mensagem="+$("#mensagem").val()).done(function(html) {
+			$("#ajxretorno").html(html);
+			$("#formcontato").trigger("reset");
+		});
+	}
+	return false;	
+}
+function VComentario() {
+	idfoco = "";
+	CampoCheck("nome",(!$("#nome").val()),"");
+	CampoCheck("email",(!VEmail($("#email").val())),"");
+	CampoCheck("mensagem",(!$("#mensagem").val()),"");
+	return (idfoco == "");
+}
+var idfoco = "";
+function VBusca() {
+	if ($("#busca").val() != "")
+		document.location.href = document.location.protocol+"//"+document.location.host+"/diario-do-airsoft/busca.asp?busca="+$("#busca").val();
+	else
+		document.location.href = document.location.protocol+"//"+document.location.host+"/diario-do-airsoft";
+	return false;
+}
+function Busca() {
+	endereco_x = $("#pasta").val();
+	if ( $("#busca").val() )
+		endereco_x += "/?busca="+$("#busca").val();
+	document.location.href = endereco_x;
+	return false;
+}
+function VNewsletter() {
+	idfoco = "";
+	CampoCheck("newsnome",(!$("#newsnome").val()),"");
+	CampoCheck("newsemail",(!VEmail($("#newsemail").val())),"");
+	return (idfoco == "");
+}
+function trimToDigits(string) {
+	s = "";
+	var Numeros = /\d/;
+	for (i = 0; i <= string.length; i++) 
+		if (Numeros.test(string.substr(i,1))) s += string.substr(i,1);
+	return s;	
+}
+function VData(data) {
+	data = trimToDigits(data);
+	if (data.length < 8) return false;
+	dia = data.substr(0,2);
+	mes = data.substr(2,2);
+	ano = data.substr(4,4);
+	if(ano >= 0 && ano < 1900) return false; 
+	if(ano > 2100 || ano < 0 || mes > 12 || mes < 1) return false; 
+	numero = ((parseInt(ano) - 1884) / 4) 
+	dias = (numero == Math.floor(numero)) ? "312931303130313130313031" : "312831303130313130313031"; 
+	diamax = parseInt(dias.substring((mes - 1) * 2, ((mes - 1) * 2) + 2)); 
+	if(dia < 1 || dia > diamax) return false; 	
+	return true;
+}
+function VEmail( strEmail ) {
+	strEmail = $.trim(strEmail);
+	var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	return (filter.test(strEmail));
+}
+function NewWindow(a,b,c,d,e){LeftPosition=parseInt(screen.width?(screen.width-c)/2:0),TopPosition=parseInt(screen.height?(screen.height-d)/2:0),settings="width="+c+",height="+d+",top="+TopPosition+",left="+LeftPosition+",scrollbars="+e+",noresizable,status=yes",win=window.open(a,b,settings)}function Redimensiona(a,b){"Microsoft Internet Explorer"==navigator.appName?(a=parseInt(a)+10,b=parseInt(b)+60):(a=parseInt(a)+6,b=parseInt(b)+60);var c=navigator.userAgent,d=c.search(/\bMSIE 7.0\b/g);d>0&&(b=parseInt(b)+30);var c=navigator.userAgent,d=c.search(/\bMSIE 8.0\b/g);d>0&&(b=parseInt(b)+40);var c=navigator.userAgent,d=c.search(/\bMSIE 9.0\b/g);d>0&&(b=parseInt(b)+40);var c=navigator.userAgent,d=c.search(/\bFirefox\/3\b/g);d>0&&(b=parseInt(b)+30);var c=navigator.userAgent,d=c.search(/\bFirefox\/4\b/g);d>0&&(b=parseInt(b)+40);var c=navigator.userAgent,d=c.search(/\bSafari\b/g);d>0&&(b=parseInt(b)+25),window.resizeTo(a,b),LeftPosition=parseInt(screen.width?(screen.width-a)/2:0),TopPosition=parseInt(screen.height?(screen.height-b)/2:0),window.moveTo(LeftPosition,TopPosition),window.focus()}var win=null,ua=navigator.userAgent,ver=parseInt(navigator.appVersion),opera=/opera [56789]|opera\/[56789]/i.test(ua),ie=!opera&&/MSIE/.test(ua),ie6=ie&&/MSIE [0123456]/.test(ua),ie7=ie&&/MSIE [789]/.test(ua),ieBox=ie&&(null==document.compatMode||"CSS1Compat"!=document.compatMode),moz=!opera&&/gecko/i.test(ua),nn6=!opera&&/netscape.*6\./i.test(ua);
+function VCPF(cpf) {
+	if((cpf = cpf.replace(/[^\d]/g,"").split("")).length != 11) return false;
+	if(new RegExp("^" + cpf[0] + "{11}$").test(cpf.join(""))) return false;
+	for(var s = 10, n = 0, i = 0; s >= 2; n += cpf[i++] * s--);
+	if(cpf[9] != (((n %= 11) < 2) ? 0 : 11 - n)) return false;
+	for(var s = 11, n = 0, i = 0; s >= 2; n += cpf[i++] * s--);
+	if(cpf[10] != (((n %= 11) < 2) ? 0 : 11 - n)) return false;
+	return true;
+}

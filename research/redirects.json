@@ -1,0 +1,139 @@
+[
+  {
+    "path": "/",
+    "redirects": [],
+    "final": "https://www.acfperformance.com/",
+    "status": 200
+  },
+  {
+    "path": "/acf",
+    "redirects": [
+      {
+        "from": "https://www.acfperformance.com/acf",
+        "status": 301,
+        "to": "http://www.acfperformance.com/acf/"
+      },
+      {
+        "from": "http://www.acfperformance.com/acf/",
+        "status": 308,
+        "to": "https://www.acfperformance.com/acf/"
+      }
+    ],
+    "final": "https://www.acfperformance.com/acf/",
+    "status": 200
+  },
+  {
+    "path": "/acf/1/historia",
+    "redirects": [],
+    "final": "https://www.acfperformance.com/acf/1/historia",
+    "status": 200
+  },
+  {
+    "path": "/acf/3/equipe-performance",
+    "redirects": [],
+    "final": "https://www.acfperformance.com/acf/3/equipe-performance",
+    "status": 200
+  },
+  {
+    "path": "/performance",
+    "redirects": [
+      {
+        "from": "https://www.acfperformance.com/performance",
+        "status": 301,
+        "to": "http://www.acfperformance.com/performance/"
+      },
+      {
+        "from": "http://www.acfperformance.com/performance/",
+        "status": 308,
+        "to": "https://www.acfperformance.com/performance/"
+      }
+    ],
+    "final": "https://www.acfperformance.com/performance/",
+    "status": 200
+  },
+  {
+    "path": "/education",
+    "redirects": [
+      {
+        "from": "https://www.acfperformance.com/education",
+        "status": 301,
+        "to": "http://www.acfperformance.com/education/"
+      },
+      {
+        "from": "http://www.acfperformance.com/education/",
+        "status": 308,
+        "to": "https://www.acfperformance.com/education/"
+      }
+    ],
+    "final": "https://www.acfperformance.com/education/",
+    "status": 200
+  },
+  {
+    "path": "/media",
+    "redirects": [
+      {
+        "from": "https://www.acfperformance.com/media",
+        "status": 301,
+        "to": "http://www.acfperformance.com/media/"
+      },
+      {
+        "from": "http://www.acfperformance.com/media/",
+        "status": 308,
+        "to": "https://www.acfperformance.com/media/"
+      }
+    ],
+    "final": "https://www.acfperformance.com/media/",
+    "status": 200
+  },
+  {
+    "path": "/portal",
+    "redirects": [
+      {
+        "from": "https://www.acfperformance.com/portal",
+        "status": 301,
+        "to": "http://www.acfperformance.com/portal/"
+      },
+      {
+        "from": "http://www.acfperformance.com/portal/",
+        "status": 308,
+        "to": "https://www.acfperformance.com/portal/"
+      }
+    ],
+    "final": "https://www.acfperformance.com/portal/",
+    "status": 200
+  },
+  {
+    "path": "/contato",
+    "redirects": [
+      {
+        "from": "https://www.acfperformance.com/contato",
+        "status": 301,
+        "to": "http://www.acfperformance.com/contato/"
+      },
+      {
+        "from": "http://www.acfperformance.com/contato/",
+        "status": 308,
+        "to": "https://www.acfperformance.com/contato/"
+      }
+    ],
+    "final": "https://www.acfperformance.com/contato/",
+    "status": 200
+  },
+  {
+    "path": "/area-do-cliente",
+    "redirects": [
+      {
+        "from": "https://www.acfperformance.com/area-do-cliente",
+        "status": 301,
+        "to": "http://www.acfperformance.com/area-do-cliente/"
+      },
+      {
+        "from": "http://www.acfperformance.com/area-do-cliente/",
+        "status": 308,
+        "to": "https://www.acfperformance.com/area-do-cliente/"
+      }
+    ],
+    "final": "https://www.acfperformance.com/area-do-cliente/",
+    "status": 200
+  }
+]

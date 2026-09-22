@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+# Private design preview. Enable indexing only after final content approval.

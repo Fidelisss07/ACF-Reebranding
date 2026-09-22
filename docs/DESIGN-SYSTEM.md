@@ -1,0 +1,33 @@
+# Design system — ACF Performance
+
+Os tokens implementados ficam em `dist/style.css`; os componentes compartilhados em `build.py`.
+
+| Papel | Valor |
+|---|---|
+| Fundo | #101114 |
+| Superfície | #191b20 |
+| Superfície elevada | #22252b |
+| Texto principal | #f6f6f7 |
+| Texto secundário | #b5b7bf |
+| Divisor decorativo | #393c43 |
+| Ação principal / marca | #e00000 |
+| Destaque textual no escuro | #ff6666 |
+| Seção clara | #eff0f2 |
+| Texto na seção clara | #191b20 |
+
+Barlow Condensed 600 para títulos e números; Barlow 400–700 para leitura e controles; IBM Plex Mono 400–500 para identificadores. Fontes carregadas por Google Fonts, com fallbacks locais. Texto de leitura geralmente 16–18px; metadados a partir de 12px; títulos fluidos por `clamp`. Evitar caixa alta em parágrafos longos; descrições integrais legadas ficam em disclosures.
+
+Escala de espaçamento: 4, 8, 12, 16, 24, 32, 48, 64 e 96px. Margens laterais fluidas, conteúdo com referência de 1400px. Pontos de adaptação: 1150, 900 e 600px. Menu compacto abaixo de 900px; grades viram uma coluna em celulares. Campos usam 16px em mobile.
+
+## Componentes e contratos
+
+- Cabeçalho: logo original, navegação, acesso externo do cliente e orçamento. Menu móvel controla `aria-expanded`; Escape fecha e devolve foco ao botão.
+- Botões: ação vermelha, alternativa contornada e link direcional. Foco visível com contorno e afastamento. Setas decorativas ocultas da árvore acessível.
+- Comparação: botões Stage 1/2 com `aria-pressed`, números atualizados em região viva; unidades e origem explícitas.
+- Catálogo: quatro selects nativos; dependentes desabilitados até seleção anterior. Estados de carregamento, seleção incompleta, aplicação sem pacote, versão inexistente e falha. Trocar seleção limpa resultados e versão antiga da URL.
+- Pacote: tabela semântica com cabeçalhos, descrição e imagens em disclosures, orçamento contextual e contratação original.
+- Curso: formato, aprendizado, duração, pré-requisito e CTA; data/preço ausentes marcados. Detalhe mantém descrição original acessível.
+- Contato: labels associados, validação nativa e mensagem preparada localmente. O usuário abre o WhatsApp para concluir o envio; não há backend de e-mail.
+- Equipe: biografias reais e placeholders explícitos de retrato.
+
+O movimento é discreto e respeita `prefers-reduced-motion`. Imagens possuem texto alternativo; navegação tem link de salto. Divisores decorativos não substituem bordas de campos. Contraste de cores sólidas está registrado em `VERIFICACAO.md`; isso não equivale a certificação integral de acessibilidade.

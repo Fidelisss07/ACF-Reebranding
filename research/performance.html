@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#3d3d3d">
+<meta name="apple-mobile-web-app-title" content="ACF Performance">
+<meta name="application-name" content="ACF Performance">
+<meta name="msapplication-TileColor" content="#3d3d3d">
+<meta name="theme-color" content="#3d3d3d">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="canonical" href="https://www.acfperformance.com/performance" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:url" content="https://www.acfperformance.com/performance" />
+<meta property="og:image" content="https://www.acfperformance.com/imagens/ogimage.png"/>
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="470" />
+<meta property="og:image:height" content="246" />
+<meta property="og:type" content="article"> 
+<meta property="fb:admins" content="100000209884815" />
+<meta property="og:title" content="Performance :: ACF Performance"/>
+<meta property="og:site_name" content="ACF Performance"/>
+<meta property="og:description" content="Utilize nosso filtro para encontrar o que está procurando"/>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="description" content="Utilize nosso filtro para encontrar o que está procurando">
+<meta name="keywords" content="performance, tuning" />
+<meta name="robots" content="index,follow" />
+<meta name="revisit-after" content="7 days" />
+<title>Performance :: ACF Performance</title>
+<link type="text/css" rel="stylesheet" href="https://www.acfperformance.com/css/estilo.css?v=20260415c" media="all">
+<link type="text/css" rel="stylesheet" href="https://www.acfperformance.com/css/magnific-popup.css?v=20260415c" media="all" />
+</head>
+<body>	<div id="topo">
+		<div class="bloco">
+			<h1 id="logo">
+				<a href="https://www.acfperformance.com/"><img src="https://www.acfperformance.com/imagens/logo.png" alt="" /></a>
+			</h1>
+			<a href="javascript:;" id="bot-mobile" style="display:none;" onClick="MenuMobile();"><span class="linha-1"></span><span class="linha-2"></span><span class="linha-3"></span>Menu</a>
+			<input type="hidden" id="siteurl" value="https://www.acfperformance.com/" />
+			<ul id="menu">
+				<li class="ferramenta">
+					<a href="https://www.acfperformance.com/acf"><span>ACF</span><strong></strong></a>
+					<ul class="submenu">
+						<li><a  href="https://www.acfperformance.com/acf/1/historia">História</a></li>
+						<li><a  href="https://www.acfperformance.com/acf/3/equipe-performance">Equipe Performance</a></li>
+					</ul>
+				</li>
+				<li class="ferramenta"><a href="https://www.acfperformance.com/performance"><span>Performance</span><strong></strong></a></li>
+				<li class="ferramenta"><a href="https://www.acfperformance.com/education"><span>Education</span><strong></strong></a></li>
+				<li class="ferramenta">
+					<a href="https://www.acfperformance.com/media"><span>MEDIA</span><strong></strong></a>
+				</li>
+				<li class="ferramenta"><a href="https://www.acfperformance.com/portal"><span>Portal</span><strong></strong></a></li>
+				<li class="ferramenta"><a href="https://www.acfperformance.com/contato"><span>Contato</span><strong></strong></a></li>
+			</ul>
+			<a href="https://www.acfperformance.com/area-do-cliente" id="botao-deslogado" class="menu-restrito restrito-mobile mobile">&Aacute;rea do Cliente</a>
+			<a href="javascript:;" onclick="MobileFechar();" id="mobile-overlay"></a>
+		</div>
+	</div>
+	<!--Fim da div topo-->
+	<div id="menu-restrito">
+		<div class="bloco">
+			<div class="container">
+				<p class="vazio">&nbsp;</p>
+				<ul>
+					<li class="entrar"><a href="https://www.acfperformance.com/area-do-cliente">Cadastre-se ou fa&ccedil;a login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="conteudo" class="performance contato">
+		<h2 id="titulo-secao"><div class="bloco"><div><span class="maior">Performance</span></div></div></h2>
+		<div id="performance-filtro">
+			<div class="bloco">
+				<div class="linha primeira">
+					<label class="label" for="fabricante">Fabricante</label>
+					<select id="fabricante" class="campo" onChange="AjxPerfFabricante();">
+						<option value="" hidden="hidden"></option>
+						<option value="14">Audi</option>
+						<option value="15">BMW</option>
+						<option value="8">Chevrolet</option>
+						<option value="46">Citroen</option>
+						<option value="44">Fiat</option>
+						<option value="2">Ford</option>
+						<option value="48">Honda</option>
+						<option value="58">Injeção Programável Aspirado</option>
+						<option value="59">Injeção Programável Turbo</option>
+						<option value="49">Jeep</option>
+						<option value="53">Land Rover</option>
+						<option value="21">Mercedes</option>
+						<option value="19">Mini</option>
+						<option value="9">Mitsubishi</option>
+						<option value="54">Nissan</option>
+						<option value="47">Porsche</option>
+						<option value="41">Renault</option>
+						<option value="16">Subaru</option>
+						<option value="57">Troller</option>
+						<option value="1">Volkswagen</option>
+					</select>
+				</div>
+				<span id="ajxfabricante">
+					<div class="linha desabilitado">
+						<label class="label desabilitado" for="modelo">Modelo</label>
+						<select id="modelo" class="campo desabilitado" disabled><option value=""></option></select>
+					</div>
+					<span id="ajxmodelo">
+						<div class="linha desabilitado">
+							<label class="label desabilitado" for="ano">Ano de Fabrica&ccedil;&atilde;o</label>
+							<select id="ano" class="campo desabilitado" disabled><option value=""></option></select>
+						</div>
+						<span id="ajxano">
+							<div class="linha desabilitado">
+								<label class="label desabilitado" for="versao">Vers&atilde;o/Motor</label>
+								<select id="versao" class="campo desabilitado" disabled><option value=""></option></select>
+							</div>
+						</span>
+					</span>
+				</span>
+			</div>
+		</div>
+		<div class="bloco">
+			<div id="ajxstages">
+				<p class="msg-instrucao"><img src="https://www.acfperformance.com/imagens/logo.png" />Utilize nosso filtro para encontrar o que está procurando</p>
+			</div>
+			<div class="clearboth"></div>
+	
+<ul class="homevoltar">
+                  <li><a href="https://www.acfperformance.com/">Home</a></li><li><a href="javascript:history.back(1);">Voltar</a></li>
+               </ul>
+					<div class="clearboth"></div>
+		</div>
+	</div>
+	<!--Fim da div conteudo--> 
+	<div id="rodape">
+		<div class="bloco">
+			<div class="logo"><img src="https://www.acfperformance.com/imagens/logo-rodape.png" alt="" /></div>
+			<div id="social"><p class="titredes">Redes Sociais</p><div class="redes"><a class='instagram' alt='Instagram' title='Instagram' href='http://www.instagram.com/acfperformance' target='_blank'>Instagram</a><a class='facebook' alt='Facebook' title='Facebook' href='http://www.facebook.com/acfperformance' target='_blank'>Facebook</a><a class='youtube' alt='Youtube' title='Youtube' href='http://www.youtube.com/acfperformance' target='_blank'>Youtube</a></div></div>
+			<div id="copyright">ACF © 2026 - Todos Direitos Reservados</div>
+			<div id="assinaturas">
+				<a href="http://www.sitevip.com.br/e-box" target="_blank"><img src="https://www.acfperformance.com/imagens/assinatura-ebox.png" alt="e-box - Sitevip Internet" title="e-box - Sitevip Internet" /></a>
+				<a href="http://www.sitevip.com.br" target="_blank"><img src="https://www.acfperformance.com/imagens/assinatura-sitevip.png" alt="Sitevip Internet" title="Sitevip Internet" /></a>
+			</div>
+		</div>
+	</div>
+	<!--Fim da div rodape-->
+	<div class="lgpd" style="display:none;">
+		<div class="texto html">Nós usamos cookies e outras tecnologias semelhantes para melhorar a sua experiência em nossos serviços. Ao utilizar nosso site, você concorda com tal monitoramento. Para mais informações, consulte nossa <a href="/item/1/" target="_blank">Política de Privacidade</a>.</div>
+		<div class="botoes"><a href="javascript:;" onClick="FecharLGPD();">Prosseguir</a></div>
+	</div>
+	<a id="chat-whatsapp" target="_blank" href="https://www.acfperformance.com/whatsapp?fone=11984496047"><span>Fale conosco via WhatsApp</span></a>
+	<script src="https://www.acfperformance.com/sysjs/jquery.js?v=20260415c" type="text/javascript"></script>
+	<script src="https://www.acfperformance.com/sysjs/funcoes.js?v=20260415c" type="text/javascript"></script>
+	<script src="https://www.acfperformance.com/sysjs/jquery.dropdown.js?v=20260415c" type="text/javascript"></script>
+	<script src="https://www.acfperformance.com/sysjs/jquery.magnific-popup.js?v=20260415c" type="text/javascript"></script>
+	<script src="https://www.acfperformance.com/sysjs/jquery.owl-carousel.js?v=20260415c" type="text/javascript"></script>
+</body>
+</html>
