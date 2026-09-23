@@ -5,7 +5,6 @@ function closeMenu(){navigation?.classList.remove('open');menu?.setAttribute('ar
 menu?.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));navigation.classList.toggle('open',open);});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu?.getAttribute('aria-expanded')==='true'){closeMenu();menu.focus();}});
 navigation?.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});
-document.querySelectorAll('[data-stage]').forEach(button=>button.addEventListener('click',()=>{const second=button.dataset.stage==='2';document.querySelectorAll('[data-stage]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));document.querySelector('#power').textContent=second?'520':'501';document.querySelector('#power-gain').textContent=second?'+89 HP':'+70 HP';document.querySelector('#torque').textContent=second?'720':'680';document.querySelector('#torque-gain').textContent=second?'+170 Nm':'+130 Nm';}));
 const form=document.querySelector('#contact-form');
 form?.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const data=new FormData(form);const message=['Olá, equipe ACF!',...Array.from(data).filter(([,v])=>String(v).trim()).map(([k,v])=>`${k}: ${String(v).trim()}`)].join('\n');const a=document.querySelector('#whatsapp-message');a.href=`https://wa.me/5511984496047?text=${encodeURIComponent(message)}`;document.querySelector('#contact-result').hidden=false;a.focus();});
 if(document.querySelector('#brand'))initializeCatalog();
@@ -61,4 +60,42 @@ async function initializeCatalog(){
   if(id){let found=false;for(const b of catalog.brands)for(const m of b.models)for(const y of m.years){const v=y.versions.find(v=>v.id===id);if(v){selects[0].value=b.id;populate(selects[1],b.models);selects[1].value=m.id;populate(selects[2],m.years);selects[2].value=y.id;populate(selects[3],y.versions);selects[3].value=v.id;render();found=true;}}if(!found)status.textContent='Versão não encontrada. Selecione uma aplicação no catálogo.';}
   else if(params.get('category')==='programavel'){const b=catalog.brands.find(b=>b.name.includes('Programável'));if(b){selects[0].value=b.id;selects[0].dispatchEvent(new Event('change'));}}
  }catch{status.textContent='Não foi possível carregar o catálogo.';selects.forEach(s=>s.disabled=true);results.innerHTML='<div class="empty-state"><h3>Vamos encontrar seu pacote.</h3><p>Consulte o catálogo oficial ou fale com a equipe ACF.</p><a class="btn" href="https://www.acfperformance.com/performance/">Catálogo oficial ↗</a></div>';}
+}
+
+if(document.getElementById('compare-brand'))initializeCarComparison();
+async function initializeCarComparison(){
+ const brandSelect=document.getElementById('compare-brand'),carSelect=document.getElementById('compare-car'),status=document.getElementById('compare-status'),cards=document.getElementById('compare-cards'),details=document.getElementById('compare-packages');
+ const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const display=value=>value?String(value).replace(/(\d)(HP|NM)/gi,'$1 $2').replace(/NM/g,'Nm'):'Não publicado';
+ const row=(p,key)=>p?.metrics.find(r=>key==='power'?/^pot/i.test(r.metric):/^tor/i.test(r.metric));
+ let entries=[];
+ function draw(){
+  const entry=entries.find(e=>e.v.id===carSelect.value);if(!entry)return;
+  const {v,name}=entry,one=v.packages.find(p=>/^stage\s*1$/i.test(p.name)),two=v.packages.find(p=>/^stage\s*2$/i.test(p.name));
+  const originals=key=>{const values=[...new Set([one,two].filter(Boolean).map(p=>row(p,key)?.original).filter(Boolean))];return values.length===1?display(values[0]):values.length?'Varia por pacote':'Não publicado';};
+  const originalPower=originals('power'),originalTorque=originals('torque');
+  const stages=[{name:'Original',p:null},{name:'Stage 1',p:one},{name:'Stage 2',p:two}];
+  cards.innerHTML=stages.map((stage,i)=>{
+   const present=i===0||!!stage.p;
+   const power=i===0?originalPower:display(row(stage.p,'power')?.tuned),torque=i===0?originalTorque:display(row(stage.p,'torque')?.tuned);
+   const gains=i>0&&present?`<div class="compare-gains"><span>Ganho de potência<strong>${escape(display(row(stage.p,'power')?.gain))}</strong></span><span>Ganho de torque<strong>${escape(display(row(stage.p,'torque')?.gain))}</strong></span></div>`:i===0?'<p class="compare-baseline">Referência original publicada no catálogo.</p>':'<p class="compare-baseline">Este stage não está publicado para a versão selecionada.</p>';
+   const url='https://wa.me/5511984496047?text='+encodeURIComponent('Olá! Quero saber sobre '+stage.name+' para '+name+'. Podem confirmar aplicação e orçamento?');
+   return `<article class="compare-stage ${i===0?'original':''} ${present?'':'unavailable'}"><div class="compare-stage-head"><span class="code">0${i+1}</span><h3>${stage.name}</h3><span class="compare-tag">${i===0?'REFERÊNCIA':present?'PREPARADO':'NÃO PUBLICADO'}</span></div><p class="compare-vehicle">${escape(name)}</p><dl><div><dt>Potência</dt><dd>${escape(present?power:'—')}</dd></div><div><dt>Torque</dt><dd>${escape(present?torque:'—')}</dd></div></dl>${gains}${i>0?`<a class="btn ${present?'':'btn-line'}" href="${escape(url)}">${present?'Orçar '+stage.name:'Consultar a ACF'} ↗</a>`:'<a class="arrow-link" href="/performance/?version='+encodeURIComponent(v.id)+'">Consultar aplicação ↗</a>'}</article>`;
+  }).join('');
+  status.textContent=name+' — comparação atualizada.';details.href='/performance/?version='+encodeURIComponent(v.id);
+ }
+ function loadCars(preferred){
+  const list=entries.filter(e=>e.brandId===brandSelect.value);
+  carSelect.replaceChildren(...list.map(e=>new Option(e.label,e.v.id)));carSelect.disabled=!list.length;
+  if(preferred&&list.some(e=>e.v.id===preferred))carSelect.value=preferred;
+  draw();
+ }
+ try{
+  const response=await fetch('/data/catalog.json');if(!response.ok)throw new Error();const data=await response.json();
+  for(const b of data.brands)for(const m of b.models)for(const y of m.years)for(const v of y.versions){if(v.packages.some(p=>/^stage\s*[12]$/i.test(p.name)))entries.push({brandId:b.id,brand:b.name,label:m.name+' / '+y.name+' / '+v.name,name:b.name+' '+m.name+' / '+y.name+' / '+v.name,v});}
+  if(!entries.length)throw new Error();
+  const brands=data.brands.filter(b=>entries.some(e=>e.brandId===b.id));brandSelect.replaceChildren(...brands.map(b=>new Option(b.name,b.id)));brandSelect.disabled=false;
+  const initial=entries.find(e=>e.v.id==='96')||entries[0];brandSelect.value=initial.brandId;loadCars(initial.v.id);
+  brandSelect.addEventListener('change',()=>loadCars());carSelect.addEventListener('change',draw);
+ }catch{status.textContent='Não foi possível carregar a comparação. Consulte os pacotes no catálogo ou fale com a ACF.';brandSelect.disabled=true;carSelect.disabled=true;}
 }
