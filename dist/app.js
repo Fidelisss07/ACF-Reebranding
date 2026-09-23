@@ -62,40 +62,27 @@ async function initializeCatalog(){
  }catch{status.textContent='Não foi possível carregar o catálogo.';selects.forEach(s=>s.disabled=true);results.innerHTML='<div class="empty-state"><h3>Vamos encontrar seu pacote.</h3><p>Consulte o catálogo oficial ou fale com a equipe ACF.</p><a class="btn" href="https://www.acfperformance.com/performance/">Catálogo oficial ↗</a></div>';}
 }
 
-if(document.getElementById('compare-brand'))initializeCarComparison();
-async function initializeCarComparison(){
- const brandSelect=document.getElementById('compare-brand'),carSelect=document.getElementById('compare-car'),status=document.getElementById('compare-status'),cards=document.getElementById('compare-cards'),details=document.getElementById('compare-packages');
- const escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
- const display=value=>value?String(value).replace(/(\d)(HP|NM)/gi,'$1 $2').replace(/NM/g,'Nm'):'Não publicado';
- const row=(p,key)=>p?.metrics.find(r=>key==='power'?/^pot/i.test(r.metric):/^tor/i.test(r.metric));
- let entries=[];
- function draw(){
-  const entry=entries.find(e=>e.v.id===carSelect.value);if(!entry)return;
-  const {v,name}=entry,one=v.packages.find(p=>/^stage\s*1$/i.test(p.name)),two=v.packages.find(p=>/^stage\s*2$/i.test(p.name));
-  const originals=key=>{const values=[...new Set([one,two].filter(Boolean).map(p=>row(p,key)?.original).filter(Boolean))];return values.length===1?display(values[0]):values.length?'Varia por pacote':'Não publicado';};
-  const originalPower=originals('power'),originalTorque=originals('torque');
-  const stages=[{name:'Original',p:null},{name:'Stage 1',p:one},{name:'Stage 2',p:two}];
-  cards.innerHTML=stages.map((stage,i)=>{
-   const present=i===0||!!stage.p;
-   const power=i===0?originalPower:display(row(stage.p,'power')?.tuned),torque=i===0?originalTorque:display(row(stage.p,'torque')?.tuned);
-   const gains=i>0&&present?`<div class="compare-gains"><span>Ganho de potência<strong>${escape(display(row(stage.p,'power')?.gain))}</strong></span><span>Ganho de torque<strong>${escape(display(row(stage.p,'torque')?.gain))}</strong></span></div>`:i===0?'<p class="compare-baseline">Referência original publicada no catálogo.</p>':'<p class="compare-baseline">Este stage não está publicado para a versão selecionada.</p>';
-   const url='https://wa.me/5511984496047?text='+encodeURIComponent('Olá! Quero saber sobre '+stage.name+' para '+name+'. Podem confirmar aplicação e orçamento?');
-   return `<article class="compare-stage ${i===0?'original':''} ${present?'':'unavailable'}"><div class="compare-stage-head"><span class="code">0${i+1}</span><h3>${stage.name}</h3><span class="compare-tag">${i===0?'REFERÊNCIA':present?'PREPARADO':'NÃO PUBLICADO'}</span></div><p class="compare-vehicle">${escape(name)}</p><dl><div><dt>Potência</dt><dd>${escape(present?power:'—')}</dd></div><div><dt>Torque</dt><dd>${escape(present?torque:'—')}</dd></div></dl>${gains}${i>0?`<a class="btn ${present?'':'btn-line'}" href="${escape(url)}">${present?'Orçar '+stage.name:'Consultar a ACF'} ↗</a>`:'<a class="arrow-link" href="/performance/?version='+encodeURIComponent(v.id)+'">Consultar aplicação ↗</a>'}</article>`;
-  }).join('');
-  status.textContent=name+' — comparação atualizada.';details.href='/performance/?version='+encodeURIComponent(v.id);
+if(document.getElementById('multi-cars'))initializeMultiCar();
+async function initializeMultiCar(){
+ const container=document.getElementById('multi-cars'),add=document.getElementById('add-compare-car'),status=document.getElementById('multi-status');let entries=[],brands=[],sequence=0;
+ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const display=v=>v?String(v).replace(/(\d)(HP|NM)/gi,'$1 $2').replace(/NM/g,'Nm'):'Não publicado';
+ const metric=(p,k)=>p?.metrics.find(r=>k==='power'?/^pot/i.test(r.metric):/^tor/i.test(r.metric));
+ function refresh(){const panels=[...container.children];panels.forEach((panel,i)=>{panel.querySelector('h3').textContent='CARRO '+(i+1);const remove=panel.querySelector('.remove-car');remove.disabled=panels.length<=2;remove.setAttribute('aria-label','Remover carro '+(i+1));});}
+ function addCar(preferred,focus=false){
+  const uid=++sequence,first=entries.find(e=>e.v.id===preferred)||entries[0];
+  const panel=document.createElement('article');panel.className='multi-car';panel.innerHTML=`<div class="multi-car-head"><h3></h3><button class="remove-car" type="button">Remover</button></div><div class="compare-controls"><div><label for="mc-brand-${uid}">Fabricante</label><select id="mc-brand-${uid}"></select></div><div><label for="mc-model-${uid}">Modelo, ano e motor</label><select id="mc-model-${uid}"></select></div></div><div class="multi-car-result"></div>`;
+  container.append(panel);const bs=panel.querySelector('select'),cs=panel.querySelectorAll('select')[1],out=panel.querySelector('.multi-car-result');bs.replaceChildren(...brands.map(b=>new Option(b.name,b.id)));bs.value=first.brandId;
+  function draw(){const e=entries.find(e=>e.v.id===cs.value);if(!e)return;const one=e.v.packages.find(p=>/^stage\s*1$/i.test(p.name)),two=e.v.packages.find(p=>/^stage\s*2$/i.test(p.name));
+   const original=k=>{const vals=[...new Set([one,two].filter(Boolean).map(p=>metric(p,k)?.original).filter(Boolean))];return vals.length===1?display(vals[0]):vals.length?'Varia por pacote':'Não publicado';};
+   const rows=[['Potência','power','tuned'],['Torque','torque','tuned'],['Ganho de potência','power','gain'],['Ganho de torque','torque','gain']].map(([label,key,field])=>`<tr><th scope="row">${label}</th><td>${esc(field==='gain'?'—':original(key))}</td>${[one,two].map(p=>`<td>${esc(p?display(metric(p,key)?.[field]):'Stage não publicado')}</td>`).join('')}</tr>`).join('');
+   out.innerHTML=`<p class="multi-car-name">${esc(e.name)}</p><div class="comparison-scroll" tabindex="0" role="region" aria-label="Comparação de ${esc(e.name)}"><table class="comparison-table"><caption>${esc(e.name)} — Original, Stage 1 e Stage 2</caption><thead><tr><th scope="col">Especificação</th><th scope="col">Original</th><th scope="col">Stage 1</th><th scope="col">Stage 2</th></tr></thead><tbody>${rows}</tbody></table></div><a class="arrow-link" href="/performance/?version=${encodeURIComponent(e.v.id)}">Ver pacotes e orçamento ↗</a>`;
+  }
+  function choose(preferred){const list=entries.filter(e=>e.brandId===bs.value);cs.replaceChildren(...list.map(e=>new Option(e.label,e.v.id)));if(preferred&&list.some(e=>e.v.id===preferred))cs.value=preferred;draw();}
+  bs.addEventListener('change',()=>{choose();status.textContent='Fabricante alterado. Comparação atualizada.';});cs.addEventListener('change',()=>{draw();status.textContent='Carro alterado. Comparação atualizada.';});
+  panel.querySelector('.remove-car').addEventListener('click',()=>{if(container.children.length<=2)return;panel.remove();refresh();add.focus();status.textContent=`${container.children.length} carros na comparação.`;});
+  choose(first.v.id);refresh();if(focus){bs.focus();status.textContent=`${container.children.length} carros na comparação. Escolha o novo carro.`;}
  }
- function loadCars(preferred){
-  const list=entries.filter(e=>e.brandId===brandSelect.value);
-  carSelect.replaceChildren(...list.map(e=>new Option(e.label,e.v.id)));carSelect.disabled=!list.length;
-  if(preferred&&list.some(e=>e.v.id===preferred))carSelect.value=preferred;
-  draw();
- }
- try{
-  const response=await fetch('/data/catalog.json');if(!response.ok)throw new Error();const data=await response.json();
-  for(const b of data.brands)for(const m of b.models)for(const y of m.years)for(const v of y.versions){if(v.packages.some(p=>/^stage\s*[12]$/i.test(p.name)))entries.push({brandId:b.id,brand:b.name,label:m.name+' / '+y.name+' / '+v.name,name:b.name+' '+m.name+' / '+y.name+' / '+v.name,v});}
-  if(!entries.length)throw new Error();
-  const brands=data.brands.filter(b=>entries.some(e=>e.brandId===b.id));brandSelect.replaceChildren(...brands.map(b=>new Option(b.name,b.id)));brandSelect.disabled=false;
-  const initial=entries.find(e=>e.v.id==='96')||entries[0];brandSelect.value=initial.brandId;loadCars(initial.v.id);
-  brandSelect.addEventListener('change',()=>loadCars());carSelect.addEventListener('change',draw);
- }catch{status.textContent='Não foi possível carregar a comparação. Consulte os pacotes no catálogo ou fale com a ACF.';brandSelect.disabled=true;carSelect.disabled=true;}
+ try{const response=await fetch('/data/catalog.json');if(!response.ok)throw new Error();const data=await response.json();for(const b of data.brands)for(const m of b.models)for(const y of m.years)for(const v of y.versions)if(v.packages.some(p=>/^stage\s*[12]$/i.test(p.name)))entries.push({brandId:b.id,v,label:m.name+' / '+y.name+' / '+v.name,name:b.name+' '+m.name+' / '+y.name+' / '+v.name});if(!entries.length)throw new Error();brands=data.brands.filter(b=>entries.some(e=>e.brandId===b.id));const second=entries.find(e=>e.brandId!==entries.find(x=>x.v.id==='96')?.brandId&&e.v.packages.some(p=>p.name==='Stage 1')&&e.v.packages.some(p=>p.name==='Stage 2'))||entries[1]||entries[0];addCar('96');addCar(second.v.id);add.disabled=false;add.addEventListener('click',()=>addCar(entries[0].v.id,true));status.textContent='2 carros na comparação. Selecione as aplicações ou adicione mais carros.';
+ }catch{status.textContent='Não foi possível carregar a comparação. Consulte o catálogo de performance.';}
 }

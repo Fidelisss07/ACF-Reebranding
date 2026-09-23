@@ -43,3 +43,5 @@ Identidade estendida às 11 páginas: performance-system.css define fundo preto,
 Catálogo aprovado: catalog-layout.css implementa filtros laterais, veículo selecionado e comparação dinâmica entre original e todos os pacotes. A aplicação BMW M3 é exibida inicialmente; os filtros cobrem o catálogo completo. Valores originais divergentes não são fundidos. Detalhes comerciais permanecem expansíveis. No celular, filtros acima e tabela em região rolável com foco por teclado.
 
 Comparação na home (#resultados): fabricante e aplicação selecionáveis, três colunas Original/Stage 1/Stage 2, potência/torque e ganhos preservados. Stage ausente recebe aviso, sem números inventados. Testados BMW M3 versão 96 e Audi A1 versão 1283 sem Stage 2. Valores originais divergentes são identificados.
+
+Comparador entre carros: duas tabelas independentes iniciais, cada uma com Original, Stage 1 e Stage 2. Adição de mais carros e remoção dos extras com foco restaurado. Verificados estados 2 → 3 → 2 e ausência de overflow no mobile.
