@@ -17,3 +17,6 @@ Instale a dependência de geração com `python -m pip install -r requirements.t
 Saída estática: `dist/`. A prévia usa `noindex,nofollow` e robots bloqueado, pois ainda contém campos pendentes. Para lançar no domínio final, ajustar `ORIGIN` em `build.py`, aprovar o conteúdo e então atualizar robots e meta robots, regenerando sitemap/canonical/schema. SEO inclui títulos, descrições, OG textual e dados estruturados AutoRepair e Course; não inclui imagem social personalizada.
 
 Login, compras e inscrição ficam nos sistemas originais. O formulário apenas prepara a mensagem do WhatsApp e não armazena dados. Fontes são externas; imagens do catálogo completo podem depender do domínio original. As imagens editoriais principais estão locais.
+
+## Vercel
+O vercel.json publica os arquivos estáticos já versionados em dist, sem instalação ou build. Na Vercel, mantenha Root Directory na raiz do repositório (vazio), preset Other e branch main. Não selecione Python: build.py é um gerador local, não uma aplicação web Python. Depois de editar templates, gere e versione dist antes do push.
