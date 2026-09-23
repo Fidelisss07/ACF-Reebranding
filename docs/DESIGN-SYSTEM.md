@@ -39,3 +39,5 @@ A home usa a última composição aprovada: fundo automotivo contínuo, título 
 Revisão escolhida em 23/09/2026: composição PERFORMANCE vermelha ao fundo, carro central e CTA inferior. A arte decorativa está em hero-performance.png; título principal, navegação, legendas e botões são HTML. A arte é uma composição visual, não evidência documental de resultados.
 
 Identidade estendida às 11 páginas: performance-system.css define fundo preto, superfícies escuras, cabeçalhos com palavra decorativa vermelha, títulos condensados pesados, ações arredondadas, catálogo, formulário, cursos, equipe e rodapé. Conteúdo e integrações mantidos. Verificação: dez rotas internas a 390px sem overflow, preparação local do WhatsApp e troca de fabricante no catálogo.
+
+Catálogo aprovado: catalog-layout.css implementa filtros laterais, veículo selecionado e comparação dinâmica entre original e todos os pacotes. A aplicação BMW M3 é exibida inicialmente; os filtros cobrem o catálogo completo. Valores originais divergentes não são fundidos. Detalhes comerciais permanecem expansíveis. No celular, filtros acima e tabela em região rolável com foco por teclado.
