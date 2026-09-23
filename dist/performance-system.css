@@ -1,0 +1,47 @@
+/* Shared visual language of the approved PERFORMANCE composition. */
+:root{--bg:#070708;--surface:#121214;--elevated:#1c1c20;--line:#36363b;--ink:#f7f7f8;--muted:#bdbdc5;--accent:#ff666b;--red:#e00000}
+body{background:var(--bg)}
+h1,h2,h3{font-weight:800}h2{letter-spacing:-.015em}
+.btn{border-radius:999px;padding:16px 28px;min-height:54px;transition:background .18s,box-shadow .18s}
+.btn:hover{box-shadow:0 0 22px #e0000026}.btn-line{border-color:#777780}
+.inner-page>.topline{background:#050505;border-color:#27272c;font-size:.75rem}
+.inner-page>.header{background:#080809;padding:22px 4.4%;min-height:100px;border-color:#29292d}
+.inner-page>.header .brand,.inner-page>.header .brand img{width:130px}
+.inner-page>.header nav{gap:26px}.inner-page>.header nav a{font-size:.9375rem}
+.inner-page>.header nav [aria-current=page]{color:#ff666b}
+.inner-page>.header>.btn{border:1px solid #f22;background:#080809;box-shadow:0 0 16px #e0000028;border-radius:18px}
+.page-hero{position:relative;isolation:isolate;overflow:hidden;padding-top:42px;padding-bottom:64px;background:radial-gradient(ellipse at 90% 15%,#69080866,transparent 60%),linear-gradient(115deg,#090909 25%,#130708);border-bottom:1px solid #4a171b;min-height:390px}
+.page-hero:after{content:'';position:absolute;left:5%;bottom:0;width:70px;height:3px;background:#ed0000}
+.page-backdrop-word{position:absolute;z-index:-1;right:-1%;top:25px;font:800 clamp(7rem,19vw,20rem)/.9 var(--display);letter-spacing:-.045em;color:#c900001c;white-space:nowrap;pointer-events:none;user-select:none;text-transform:uppercase}
+.page-hero .crumb{margin-bottom:28px;letter-spacing:.08em;position:relative}
+.page-hero .eyebrow{color:#ceced4;letter-spacing:.13em;margin-bottom:18px}
+.page-hero h1{font-size:clamp(3.5rem,6.5vw,6.5rem);line-height:.98;max-width:1150px;margin-bottom:25px;text-transform:uppercase}
+.page-hero>.lead{color:#d0d0d6;max-width:710px;font-size:1.125rem}
+.section-head h2,.story-band h2{font-weight:800}.eyebrow{letter-spacing:.12em}
+.results{background:radial-gradient(ellipse at 100% 0,#4b080824,transparent 70%),#101012}
+.result-visual img,.feature-image{border-bottom:2px solid #e00000}
+.segmented{border-color:#45454d;gap:12px;padding-bottom:12px}.segmented button{border:1px solid #55555d;border-radius:40px;min-width:110px;padding:13px 24px}.segmented [aria-pressed=true]{border-color:#e00000}
+.proof-bar{background:#0e0e10;border-top:1px solid #2c2c31;border-bottom:1px solid #2c2c31}
+.proof-bar strong{color:#f5f5f6;font-weight:800}.service-row{border-color:#38383e}.service-row>a:hover{background:#a800000b}
+.story-band{background:linear-gradient(110deg,#090909,#190708);border-color:#33181a}
+.light{background:#0e0e10;color:var(--ink);color-scheme:dark}.light em,.light .code,.light .eyebrow>span{color:var(--accent)}
+.light .section-head p,.light .eyebrow,.light .note{color:var(--muted)}.light .missing{color:#ffce81}.light .btn:focus-visible{outline-color:#ff666b}
+.course{background:linear-gradient(145deg,#1a1214,#121214 50%);color:var(--ink);border:1px solid #393036;border-top:3px solid #e00000;padding:38px}
+.course>p,.course dt{color:var(--muted)}.course dl>div{border-color:#3c373e}.course .tag{border-color:#8a5358;color:#ffc3c6;border-radius:30px}.course h3{font-size:2.9rem}
+.course-top{padding-bottom:22px;border-bottom:1px solid #393036}.course .btn{font-size:.9375rem}
+.filters{background:#141113;border:1px solid #3e2a2e;border-top:3px solid #e00000;padding:30px}
+input,select,textarea{background:#080809;border-color:#72727c;border-radius:6px;min-height:52px}
+input:hover,select:hover,textarea:hover{border-color:#bcbcc3}
+.package{background:linear-gradient(150deg,#211013,#111113 35%);border:1px solid #3b2c31;border-top:3px solid #e00000;padding:32px}
+.package h3{font-weight:800}.package .price{font-size:2rem}.package table{font-variant-numeric:tabular-nums}
+.empty-state{background:#100d0f;border-color:#584047}.empty-state h3{font-weight:800}.enroll{background:linear-gradient(145deg,#291013,#121214 50%);border:1px solid #4c3036;border-top:3px solid #e00000}
+.timeline>div{border-top-width:2px}.timeline .code{color:#ff666b;font-size:2.6rem;font-weight:800}
+.team-member{border-color:#3d2428}.team-photo{background:radial-gradient(ellipse at 50% 100%,#4e101844,transparent 65%),#101012;border-color:#69434a}
+.team-member h2{font-weight:800}.team-member .eyebrow{color:#ff9b9f}
+.media-mini{background:linear-gradient(120deg,#201013,#111113);border-color:#493036}.video-card{border-bottom:3px solid #e00000}.play{background:#e00000;border:0}.shop-band{border-color:#47272d}
+.access-panel,.address-panel{background:radial-gradient(ellipse at 100% 0,#4e10183b,transparent 65%),#121214;border:1px solid #422b31;border-top:3px solid #e00000}.access-panel.secondary{border-top-color:#795359}
+.closing{background:radial-gradient(ellipse at 0 100%,#57090966,transparent 60%),#0b0809;border-top:1px solid #833039;position:relative}
+.closing h2{font-weight:800;font-size:clamp(2.8rem,4.6vw,4.7rem)}.footer{background:#050505}.footer-bottom{border-color:#333338}.footer-grid strong{font-size:.75rem;color:#c4c4cd}
+@media(max-width:1150px){.inner-page>.header{gap:20px}.inner-page>.header nav{gap:17px}.inner-page>.header nav a{font-size:.875rem}.inner-page>.header .brand,.inner-page>.header .brand img{width:108px}}
+@media(max-width:900px){.inner-page>.header{min-height:84px}.inner-page>.header nav{background:#111113;border-color:#553037}.inner-page>.header nav a{font-size:1rem}.page-hero{min-height:350px}.page-backdrop-word{top:65px;font-size:24vw}.course{padding:28px}.filters{padding:24px}}
+@media(max-width:600px){.inner-page>.header{padding:16px 6%;min-height:78px}.page-hero{padding-top:30px;padding-bottom:38px;min-height:0}.page-hero .crumb{margin-bottom:26px}.page-hero .eyebrow{font-size:.75rem;letter-spacing:.08em}.page-hero h1{font-size:clamp(2.65rem,11.5vw,4rem);line-height:1.03;overflow-wrap:anywhere}.page-hero>.lead{font-size:1rem}.page-backdrop-word{font-size:35vw;right:-12%;top:65px}.btn{padding:15px 22px;font-size:.9375rem}.course{padding:26px}.course h3{font-size:2.4rem}.course dl>div{font-size:.875rem}.package{padding:24px 20px}.filters{padding:22px}.closing h2{font-size:2.8rem}.access-panel,.address-panel{padding:27px}.timeline .code{font-size:2rem}.inner-page>.topline{font-size:.75rem;letter-spacing:.02em}.home-approved .dramatic-actions .btn{padding:15px 24px}}
