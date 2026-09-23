@@ -31,3 +31,7 @@ Escala de espaçamento: 4, 8, 12, 16, 24, 32, 48, 64 e 96px. Margens laterais fl
 - Equipe: biografias reais e placeholders explícitos de retrato.
 
 O movimento é discreto e respeita `prefers-reduced-motion`. Imagens possuem texto alternativo; navegação tem link de salto. Divisores decorativos não substituem bordas de campos. Contraste de cores sólidas está registrado em `VERIFICACAO.md`; isso não equivale a certificação integral de acessibilidade.
+
+## Home aprovada — revisão visual
+
+A home usa a última composição aprovada: fundo automotivo contínuo, título em duas linhas, CTA à esquerda e faixa de serviços. `dist/approved-home.css` concentra os estilos específicos. A imagem `hero-approved.png` é uma composição gerada a partir da foto original e do conceito aprovado, não um novo registro documental da oficina. Textos, menu e botões permanecem HTML acessível. No celular, texto e orçamento precedem a imagem para preservar legibilidade.
